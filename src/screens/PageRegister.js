@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Text } from 'react-native'
 import { TextInput, Button } from 'react-native-paper';
 import { propsStack } from '../routes/Stack/Models'
@@ -8,69 +8,82 @@ import { AuthContext } from '../contexts/auth'
 
 import Header from '../components/header'
 
-import axios from "axios";
 import api from '../services/api'
 
-const apiKey = 'nXcqgTjPL69FTZyrPGj8Ah831G2niLMSU63LtEysWYMz9gPdd2p6s5pZ946mBolasxzXXxS';
-
 const App = () => {
-    
-    const [nome, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    
-    const {register} = useContext(AuthContext)
 
-    
-    function handleLogin(){
-        register(nome, phone)
+    const [customer, setCustomer] = React.useState([]);
+
+    // function addUser() {
+    //     if((nome !== '' && telefone !== '')){
+    //         const newUser = {
+    //             'nome': nome,
+    //             'telefone': telefone,
+    //           }
+    //           api.post("api/Customer/create").then((response) => {
+    //             setCustomer(response.data)
+    //             nome = '';
+    //             telefone = '';
+    //         });
+    //     }
+    // }
+
+    const [nome, setNome] = useState('');
+    const [telefone, setTelefone] = useState('');
+
+    const { register } = useContext(AuthContext)
+
+
+    function handleLogin() {
+        register(nome, telefone)
     }
 
     const mask = '(11) 00000-0000';
-    
+
     return (
         <ScrollView style={style.global}>
-        
-        {/* Header */}
+
+            {/* Header */}
             <View>
                 <Header />
             </View >
 
             <Text style={style.firstText}>Informe seus dados</Text>
 
-        <View style={style.containerInput}>
+            <View style={style.containerInput}>
 
 
-            <View>
+                <View>
 
-                <TextInput
-                style={style.input}
-                value={nome}
-                mode="outlined"
-                label="Nome Completo"
-                onChangeText={(name) => setName(name)}
-                />
+                    <TextInput
+                        style={style.input}
+                        value={nome}
+                        mode="outlined"
+                        label="Nome Completo"
+                        onChangeText={(name) => setNome(name)}
+                    />
+
+                </View>
+
+                <View>
+
+                    <TextInput
+                        style={style.input}
+                        value={telefone}
+                        mode="outlined"
+                        label="Numero de Celular"
+                        keyboardType="numeric"
+                        placeholder={mask}
+                        onChangeText={(number) => setTelefone(number)}
+                    />
+
+                </View>
+
+                <Button style={style.button} mode="contained" onPress={handleLogin} uppercase={true} >
+                    Continuar
+                </Button>
 
             </View>
-
-            <View>
-
-                <TextInput
-                style={style.input}
-                value={phone}
-                mode="outlined"
-                label="Numero de Celular"
-                keyboardType="numeric"
-                placeholder={mask}
-                onChangeText={(number) => setPhone(number)}
-                />
-
-            </View>
-
-            <Button  style={style.button} mode="contained" onPress={handleLogin} uppercase={true} >
-            Continuar
-            </Button>
-
-        </View>
 
         </ScrollView>
     )
@@ -82,19 +95,19 @@ const style = StyleSheet.create({
     global: {
         backgroundColor: '#FAEDDF'
     },
-    firstText:{
+    firstText: {
         textAlign: 'center',
         fontSize: 18,
         marginTop: 30,
         fontFamily: 'RussoOne-Regular',
         color: 'black'
     },
-    containerInput:{
+    containerInput: {
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 50, 
+        marginTop: 50,
     },
-    input:{
+    input: {
         marginBottom: 15,
     },
     button: {

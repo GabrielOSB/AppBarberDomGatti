@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native'
+import React, {useState} from "react";
+import { StyleSheet, View, ScrollView, Text, TouchableOpacity, Platform} from 'react-native'
 import { propsStack } from '../routes/Stack/Models'
 import { useNavigation } from '@react-navigation/native'
 
@@ -9,42 +9,46 @@ import { Card, Button } from 'react-native-paper';
 
 LocaleConfig.locales.BR = {
     monthNames: [
-      'Janeiro',
-      'Fevereiro',
-      'Março',
-      'Abril',
-      'Maio',
-      'Junho',
-      'Julho',
-      'Agosto',
-      'Setembro',
-      'Outubro',
-      'Novembro',
-      'Dezembro'
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro'
     ],
     monthNamesShort: ['Jan.', 'Fev.', 'Mar', 'Abril', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set.', 'Out.', 'Nov.', 'Dez.'],
     dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
     dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sab.'],
     today: "Hoje"
-  };
-  LocaleConfig.defaultLocale = 'BR';
+};
+LocaleConfig.defaultLocale = 'BR';
 
 const App = () => {
     const navigation = useNavigation()
+    function handleConfirm (){
+        navigation.navigate("Price")
+    }
+
     return(
-    <ScrollView style={styles.global}> 
+    <ScrollView style={styles.global}>
 
         {/* Header */}
         <View>
-            <Header /> 
+            <Header />
         </View >
         {/* Calendario */}
         <View style={styles.container}>
             < Calendar
-                 onDayPress={date => {console.log(date)}}  
+                 onDayPress={date => {console.log(date)}}
                  hideExtraDays={true}
                  hideArrows={true}
-                 
+
 
                  theme={{
                     calendarBackground: '#3B3F49',
@@ -53,10 +57,13 @@ const App = () => {
                     monthTextColor: '#FAEDDF',
                   }}
             />
+
+
+
         </View>
 
         {/* Horarios */}
-        
+
 
         <View style={styles.viewCard}>
 
@@ -86,7 +93,7 @@ const App = () => {
         </View>
 
         <View style={styles.viewCard}>
-            
+
             <Card style={styles.card}>
                 <TouchableOpacity>
                     <Text style={styles.textCards}>
@@ -113,7 +120,7 @@ const App = () => {
         </View>
 
         <View style={styles.viewCard}>
-            
+
             <Card style={styles.card}>
                 <TouchableOpacity>
                     <Text style={styles.textCards}>
@@ -140,7 +147,7 @@ const App = () => {
         </View>
 
         <View style={styles.viewCard}>
-        <Button  style={styles.button} mode="contained" onPress={() => navigation.navigate("Price")} uppercase={true} >
+        <Button  style={styles.button} mode="contained" onPress={handleConfirm} uppercase={true} >
             Continuar
         </Button>
         </View>
@@ -156,6 +163,9 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       marginBottom: 35
+    },
+    dateComponente:{
+        width: 350
     },
     global:{
         backgroundColor: '#FAEDDF'

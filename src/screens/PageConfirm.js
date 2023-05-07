@@ -32,7 +32,7 @@ const App = () => {
                                 <Text style={style.textCard}>Agendamento Confirmado !!</Text>
                             </View>
                                 <Text style={style.textCardSecondary}>Dia: {user.nome}</Text>
-                                <Text style={style.textCardSecondary}>Horario: {user.phone}</Text>
+                                <Text style={style.textCardSecondary}>Horario: {user.telefone}</Text>
 
                         </Card.Content>
 

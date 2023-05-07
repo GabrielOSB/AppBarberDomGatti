@@ -10,15 +10,13 @@ import { AuthContext } from '../contexts/auth'
 import axios from "axios";
 import api from '../services/api'
 
-const apiKey = 'nXcqgTjPL69FTZyrPGj8Ah831G2niLMSU63LtEysWYMz9gPdd2p6s5pZ946mBolasxzXXxS';
-
 const App = () => {
     const navigation = useNavigation()
 
     const {register, user} = useContext(AuthContext)
 
     function handleLogin(){
-        register(nome, phone)
+        register(nome, telefone)
     }
 
     return (
@@ -75,7 +73,7 @@ const App = () => {
                 <Card.Content>
                 <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', textAlign: 'center', marginBottom: 20}}>Proximo Agendamento</Text>
                 <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', marginBottom: 10}}>Dia: {user.nome}</Text>
-                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular',}}>Horário: {user.phone}</Text>
+                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular',}}>Horário: {user.telefone}</Text>
                 </Card.Content>
             </Card>
         </View>
