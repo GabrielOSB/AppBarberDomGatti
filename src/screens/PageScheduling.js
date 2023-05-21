@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { StyleSheet, View, ScrollView, Text, TouchableOpacity, Platform} from 'react-native'
 import { propsStack } from '../routes/Stack/Models'
 import { useNavigation } from '@react-navigation/native'
+import { AuthContext } from '../contexts/auth'
 
 import  Header  from '../components/header'
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import { Card, Button } from 'react-native-paper';
+
+import moment from 'moment';
+
+// criar uma função para validar se os dois campos foram preenchidos, se validar avançar para a proxima tela
 
 LocaleConfig.locales.BR = {
     monthNames: [
@@ -31,10 +36,36 @@ LocaleConfig.defaultLocale = 'BR';
 
 const App = () => {
     const navigation = useNavigation()
-    function handleConfirm (){
-        navigation.navigate("Price")
+
+    const [data, setdata] = useState('');
+    const [hora, setHora] = useState('');
+    const { DataHorario } = useContext(AuthContext)
+
+    function confirmParaments (){
+        console.log('Avançar')
+        if(this.dataDoCalendario != '' && this.dataHorario != ''){
+            DataHorario(data, hora)
+        }else{
+            alert("Selecione uma data e hora !");
+        }
+
     }
 
+    function dateHorario (hora){
+        console.log(hora)
+        if(hora != ''){
+            this.dataHorario = hora;
+            value = {hora}
+        }
+    }
+
+    const [dataDoCalendario, setDataDoCalendario] = useState(moment().format('YYYY-MM-DD'));
+    const onDayPress = (day) => {
+        const novaData = day.dateString;
+        setDataDoCalendario(novaData);
+        value = {data}
+    };
+    
     return(
     <ScrollView style={styles.global}>
 
@@ -45,7 +76,7 @@ const App = () => {
         {/* Calendario */}
         <View style={styles.container}>
             < Calendar
-                 onDayPress={date => {console.log(date)}}
+                 onDayPress={onDayPress}
                  hideExtraDays={true}
                  hideArrows={true}
 
@@ -57,8 +88,7 @@ const App = () => {
                     monthTextColor: '#FAEDDF',
                   }}
             />
-
-
+        <Text style={styles.textDateSelect}>Data selecionada: {moment(dataDoCalendario).format('DD/MM/YYYY')}</Text>
 
         </View>
 
@@ -67,27 +97,27 @@ const App = () => {
 
         <View style={styles.viewCard}>
 
-            <Card style={styles.card}>
+            <Card style={styles.card}>  
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('09:00')}> 
                         09:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '10:00')}>
                         10:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '11:00')}>
                         11:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
         </View>
@@ -96,25 +126,25 @@ const App = () => {
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '12:00')}>
                         12:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '14:00')}>
                         14:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '15:00')}>
                         15:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
         </View>
@@ -123,31 +153,31 @@ const App = () => {
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '16:00')}>
                         16:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '17:00')}>
                         17:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
 
             <Card style={styles.card}>
                 <TouchableOpacity>
-                    <Text style={styles.textCards}>
+                    <Button style={styles.textCards} onPress={() => dateHorario('18/05/2023' , '18:00')}>
                         18:00
-                    </Text>
+                    </Button>
                 </TouchableOpacity>
             </Card>
         </View>
 
         <View style={styles.viewCard}>
-        <Button  style={styles.button} mode="contained" onPress={handleConfirm} uppercase={true} >
+        <Button  style={styles.button} mode="contained" onPress={confirmParaments} uppercase={true} >
             Continuar
         </Button>
         </View>
@@ -162,7 +192,8 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      marginBottom: 35
+      marginBottom: 35,
+      backgroundColor: '#FAEDDF'
     },
     dateComponente:{
         width: 350
@@ -198,5 +229,12 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         fontFamily: 'RussoOne-Regular',
-    }
+    },
+    textDateSelect:{
+        color: '#3B3F49',
+        fontSize: 14,
+        fontFamily: 'RussoOne-Regular',
+        textAlign: 'center',
+        paddingTop: 10
+    },
   });

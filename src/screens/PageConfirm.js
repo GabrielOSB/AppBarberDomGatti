@@ -10,7 +10,7 @@ import { AuthContext } from '../contexts/auth'
 
 const App = () => {
     const navigation = useNavigation()
-    const {nome, user} = useContext(AuthContext)
+    const {nome, user, dataHorario} = useContext(AuthContext)
 
     function handleConfirm(){
         navigation.navigate("Option")
@@ -31,8 +31,10 @@ const App = () => {
                             <View style={style.containerCards}>
                                 <Text style={style.textCard}>Agendamento Confirmado !!</Text>
                             </View>
-                                <Text style={style.textCardSecondary}>Dia: {user.nome}</Text>
-                                <Text style={style.textCardSecondary}>Horario: {user.telefone}</Text>
+                                <Text style={style.textCardSecondary}>Nome: {user.nome}</Text>
+                                <Text style={style.textCardSecondary}>Numero: {user.telefone}</Text>
+                                <Text style={style.textCardSecondary}>Dia: {dataHorario.data}</Text>
+                                <Text style={style.textCardSecondary}>Hora: {dataHorario.hora}</Text>
 
                         </Card.Content>
 

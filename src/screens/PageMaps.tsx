@@ -8,6 +8,11 @@ import { Card, Button } from 'react-native-paper';
 
 const App = () => {
     const navigation = useNavigation<propsStack>()
+    
+    function maps (){
+        Linking.openURL('google.navigation:q=Barbearia Dom Gatti - Rua Alexandre Coelho - Jardim Divinolandia, Guarulhos - SP')
+    }
+
     return (
 
     <ScrollView style={styles.global}> 
@@ -31,9 +36,7 @@ const App = () => {
                 </Card.Content>
             </Card>
 
-            <Button style={styles.button} mode="contained" onPress={() => {
-                Linking.openURL('google.navigation:q=Barbearia Dom Gatti - Rua Alexandre Coelho - Jardim Divinolandia, Guarulhos - SP');
-            }} uppercase={true} >
+            <Button style={styles.button} mode="contained" onPress={maps} uppercase={true} >
                 Abrir Google Maps
             </Button>
 

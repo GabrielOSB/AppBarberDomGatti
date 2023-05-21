@@ -13,7 +13,7 @@ import api from '../services/api'
 const App = () => {
     const navigation = useNavigation()
 
-    const {register, user} = useContext(AuthContext)
+    const {register, user, dataHorario} = useContext(AuthContext)
 
     function handleLogin(){
         register(nome, telefone)
@@ -72,8 +72,10 @@ const App = () => {
             <Card style={styles.containerAgendamento}>
                 <Card.Content>
                 <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', textAlign: 'center', marginBottom: 20}}>Proximo Agendamento</Text>
-                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', marginBottom: 10}}>Dia: {user.nome}</Text>
-                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular',}}>Horário: {user.telefone}</Text>
+                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', marginBottom: 10}}>Nome: {user.nome}</Text>
+                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', marginBottom: 10}}>Telefone: {user.telefone}</Text>
+                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular', marginBottom: 10}}>Dia: {dataHorario.data}</Text>
+                <Text style={{color: '#F7A29E', fontFamily: 'RussoOne-Regular'}}>Horário : {dataHorario.hora}</Text>
                 </Card.Content>
             </Card>
         </View>

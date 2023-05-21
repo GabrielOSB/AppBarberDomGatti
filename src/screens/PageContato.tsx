@@ -27,23 +27,23 @@ const App = () => {
                 <Card.Content>
 
                     <View style={styles.containerCards}>
-                        <Image style={{ width: 60, height: 55, borderRadius: 50, marginBottom: 10}} source={require('../assets/photo-profile.jpg')} />
-                        <Text style={styles.textCard}>Nome do Barbeiro</Text>
+                        <Image style={{ width: 60, height: 55, borderRadius: 50, marginBottom: 10}} source={require('../assets/caio.png')} />
+                        <Text style={styles.textCard}>Caio Gatti</Text>
                     </View>
 
-                    <Text style={styles.textSecondary}>Whatsapp: xxxxx-xxxx</Text>
-                    <Text style={styles.textSecondary}>Instagram: @Exemplo</Text>
+                    <Text style={styles.textSecondary}>Whatsapp: 11 95887-4230</Text>
+                    <Text style={styles.textSecondary}>Instagram: @caio_dongatti</Text>
                 </Card.Content>
             </Card>
 
             <Card style={styles.card}>
                 <Card.Content>
                     <View style={styles.containerCards}>
-                        <Image style={{ width: 60, height: 55, borderRadius: 50, marginBottom: 10 }} source={require('../assets/photo-profile.jpg')} />
-                        <Text style={styles.textCard}>Nome do Barbeiro</Text>
+                        <Image style={{ width: 60, height: 55, borderRadius: 50, marginBottom: 10 }} source={require('../assets/renan.png')} />
+                        <Text style={styles.textCard}>Renan Gatti</Text>
                     </View>
-                    <Text style={styles.textSecondary}>Whatsapp: xxxxx-xxxx</Text>
-                    <Text style={styles.textSecondary}>Instagram: @Exemplo</Text>
+                    <Text style={styles.textSecondary}>Whatsapp: 11 94398-1467</Text>
+                    <Text style={styles.textSecondary}>Instagram: @renan.gatti.1</Text>
                 </Card.Content>
             </Card>
 

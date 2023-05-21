@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useContext} from "react"
 import { StyleSheet, Text, View, ScrollView} from 'react-native'
 import { propsStack } from '../routes/Stack/Models'
 import { useNavigation } from '@react-navigation/native'
@@ -6,8 +6,21 @@ import { useNavigation } from '@react-navigation/native'
 import Header from "../components/header"
 import { Card, Button } from 'react-native-paper';
 
+import { AuthContext } from "../contexts/auth"
+
 const App = () => {
-    const navigation = useNavigation<propsStack>()
+    const navigation = useNavigation()
+
+    const {register, user} = useContext(AuthContext)
+    
+    function handleLogin(){
+        register(nome, telefone)
+    }
+    
+    function returnHome(){
+        navigation.navigate("Home")
+    }
+
     return(
         
         <ScrollView style={styles.global}>
@@ -17,12 +30,12 @@ const App = () => {
                 <Card.Content>
 
                     <View>
-                        <Text style={styles.textCard}>Tem certeza que deseja cancelar ?</Text>
+                        <Text style={styles.textCard}>{user.nome}, Tem certeza que deseja cancelar, seu proximo agendamento ?</Text>
                     </View>
 
                     <View style={styles.containerButton}> 
 
-                        <Button style={styles.buttonNegative} mode="contained" onPress={() => navigation.navigate("Home")}
+                        <Button style={styles.buttonNegative} mode="contained" onPress={returnHome}
                          uppercase={true} textColor={'#3B3F49'}>
                             Não
                         </Button>
